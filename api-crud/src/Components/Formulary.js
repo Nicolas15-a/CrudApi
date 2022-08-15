@@ -1,59 +1,106 @@
 import React from "react";
 import Styles from "./Styles.css";
-import { Fab, AppBar, Button, TextField, Modal } from "@mui/material/";
+import { Fab, AppBar, Button, TextField, List, ListItem, ListItemIcon, ListItemText,ListSubheader,Modal} from "@mui/material/";
 import AddIcon from "@mui/icons-material/Add";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
+
+
+
+import PetsIcon from '@mui/icons-material/Pets';
+import EventIcon from '@mui/icons-material/Event';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import FingerprintIcon from '@mui/icons-material/Fingerprint';
+
 import { useState, useEffect } from "react";
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    position: "absolute",
-    width: 400,
-    border:'2px solid #000',
-    top:'50%',
-    left:'50%',
-    
-
-  },
-}));
+const api='https://crudcrud.com/api/ad1c0689211048efa590596711ceb0a8/unicorns';
+const styleModal={
+  position: "absolute",
+  width: 400,
+  backgroundColor:"white",
+  border: "2px solid #000",
+  top: "50%",
+  left: "50%",
+  boxShadow:"55%",
+  transform:"translate(-50%,-50%)"
+}
+const styleButton = {
+  position: "absolute",
+  marginTop: "10%",
+  marginRight: "2%",
+};
+const styleText={
+  paddingTop:"5%",
+  paddingBottom:"3%", 
+  paddingLeft:"2%"
+  
+}
 const Formulary = () => {
+  const [data, setData] = useState([]);
   const [newmodal, setNewmodal] = useState(false);
-  const styles = useStyles();
-
+  const [valuetext,setValuetext]=useState({
+    name:'',
+    age:'',
+    colour:'',
+  })
+  const handleChange=(e)=>{
+    const {name,value}=e.target;
+    setValuetext(prevState=>({
+      ...prevState,
+      [name]:value
+    }))
+    console.log(valuetext)
+  }
   const openModal = () => {
     setNewmodal(!newmodal);
   };
-  const insideModal=(
-    <div className={styles.modal}>
-      <h1>Crud</h1>
-      <h2>Please Make a Pet</h2>
-      <TextField name="name" id="outlined-name" label="Name" />
-      <TextField name="age" id="outlined-name" label="Age" />
-      <TextField name="color" id="outlined-name" label="Color" />
-      <Button>
+
+  const peticionPost=async()=>{
+   await axios.post(api,valuetext)
+    .then(response=>{
+      setData(data.concat(response.data))
+      openModal()
+    })
+  }
+  
+  
+
+
+
+  const insideModal = (
+    <div style={styleModal}>
+      <h2 style={{paddingLeft:"2%"}}>Please Make a Pet</h2>
+      <TextField style={styleText} name="name" id="outlined-name" label="Name" onChange={handleChange}/>
+      <TextField style={styleText} name="age" id="outlined-name" label="Age" onChange={handleChange}/>
+      <TextField style={styleText}  name="colour" id="outlined-name" label="Specie" onChange={handleChange}/>
+      <Button onClick={peticionPost}>
         <Fab color="warning" aria-label="add">
           <CheckCircleIcon />
         </Fab>
       </Button>
-    </div>)
+    </div>
+  );
+
 
   return (
-    <div className={styles.modal}>
+    <div className="containermodal">
       <section>
         <AppBar id="appbar">Farmer Pets</AppBar>
       </section>
-      <h1>Crud</h1>
-      <Button onClick={()=>openModal()}>
+      <h1>Push Add for Create a Pet</h1>
+      <Button style={styleButton} onClick={() => openModal()}>
         <Fab color="warning" aria-label="add">
           <AddIcon />
         </Fab>
       </Button>
 
       <Modal open={newmodal} onClose={openModal}>
-       {insideModal}
+        {insideModal}
       </Modal>
+
     </div>
   );
 };

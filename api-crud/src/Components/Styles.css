@@ -3,6 +3,14 @@
     font-weight: bolder;
 }
 h1{
-    font-family: cursive;
+    font-family: Arial, Helvetica, sans-serif;
     
+}
+.containermodal{
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+.buttonadd{
+    background-color: black;
 }

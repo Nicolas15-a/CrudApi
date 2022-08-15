@@ -5,17 +5,17 @@ import PetsIcon from '@mui/icons-material/Pets';
 import EventIcon from '@mui/icons-material/Event';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import ColorLensIcon from '@mui/icons-material/ColorLens';
+import FingerprintIcon from '@mui/icons-material/Fingerprint';
 import axios from 'axios'
 import { useState,useEffect} from 'react';
 
-const api='https://crudcrud.com/api/5396c95be37749eb97afca224ff6da83/unicorns';
+const api='https://crudcrud.com/api/ad1c0689211048efa590596711ceb0a8/unicorns';
 const View = () => {
 
-  const [anwswer, setAnswer] = useState(0);
+
   const [data, setData] = useState([]);
 
-  const peticion = async () => {
+  const peticion = async() => {
     await axios.get(api).then((response) => {
         setData(response.data)
     });
@@ -26,10 +26,10 @@ const View = () => {
 
  return (
    <div>
-     <List>
+     <List >
        <ListSubheader>Pets</ListSubheader>
        {data.map((view) => (
-         <List>
+         <List key={view.id}>
            <ListItem>
              <ListItemIcon>
                <PetsIcon />
@@ -44,7 +44,7 @@ const View = () => {
            </ListItem>
            <ListItem>
              <ListItemIcon>
-               <ColorLensIcon />
+               <FingerprintIcon/>
              </ListItemIcon>
              <ListItemText>{view.colour}</ListItemText>
            </ListItem>
