@@ -16,7 +16,7 @@ import FingerprintIcon from '@mui/icons-material/Fingerprint';
 
 import { useState, useEffect } from "react";
 
-const api='https://crudcrud.com/api/aea87f22dbca4223b45a24ca48a5d964/unicorns';
+const api='https://crudcrud.com/api/fb4413d1b2fd41db80e4c273ab7f4cd2/unicorns';
 const styleModal={
   position: "absolute",
   width: 400,
@@ -28,9 +28,7 @@ const styleModal={
   transform:"translate(-50%,-50%)"
 }
 const styleButton = {
-  position: "absolute",
-  marginTop: "10%",
-  marginRight: "2%",
+ 
 };
 const styleText={
   paddingTop:"5%",
