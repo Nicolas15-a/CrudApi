@@ -5,7 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
-
+import Modalc from "./Modalc";
 
 
 import PetsIcon from '@mui/icons-material/Pets';
@@ -16,7 +16,7 @@ import FingerprintIcon from '@mui/icons-material/Fingerprint';
 
 import { useState, useEffect } from "react";
 
-const api='https://crudcrud.com/api/ad1c0689211048efa590596711ceb0a8/unicorns';
+const api='https://crudcrud.com/api/aea87f22dbca4223b45a24ca48a5d964/unicorns';
 const styleModal={
   position: "absolute",
   width: 400,
@@ -39,13 +39,13 @@ const styleText={
   
 }
 const Formulary = () => {
+
   const [data, setData] = useState([]);
   const [newmodal, setNewmodal] = useState(false);
-  const [valuetext,setValuetext]=useState({
-    name:'',
-    age:'',
-    colour:'',
-  })
+  const [valuetext,setValuetext]=useState({ name:'',age:'',colour:'',})
+
+
+
   const handleChange=(e)=>{
     const {name,value}=e.target;
     setValuetext(prevState=>({
@@ -57,6 +57,7 @@ const Formulary = () => {
   const openModal = () => {
     setNewmodal(!newmodal);
   };
+
 
   const peticionPost=async()=>{
    await axios.post(api,valuetext)
@@ -86,6 +87,7 @@ const Formulary = () => {
 
 
   return (
+    
     <div className="containermodal">
       <section>
         <AppBar id="appbar">Farmer Pets</AppBar>
@@ -100,6 +102,8 @@ const Formulary = () => {
       <Modal open={newmodal} onClose={openModal}>
         {insideModal}
       </Modal>
+      
+
 
     </div>
   );
