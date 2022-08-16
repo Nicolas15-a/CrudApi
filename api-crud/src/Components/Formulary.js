@@ -3,16 +3,11 @@ import Styles from "./Styles.css";
 import { Fab, AppBar, Button, TextField, List, ListItem, ListItemIcon, ListItemText,ListSubheader,Modal} from "@mui/material/";
 import AddIcon from "@mui/icons-material/Add";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import Avatar from '@mui/material/Avatar';
 import { makeStyles } from "@mui/styles";
 import axios from "axios";
-import Modalc from "./Modalc";
 
 
-import PetsIcon from '@mui/icons-material/Pets';
-import EventIcon from '@mui/icons-material/Event';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import FingerprintIcon from '@mui/icons-material/Fingerprint';
 
 import { useState, useEffect } from "react";
 
@@ -82,27 +77,30 @@ const Formulary = () => {
       </Button>
     </div>
   );
-
+ const styleNavbar={
+  marginTop:'4vh',
+  width:'150vh',
+ 
+  borderRadius:'40%'
+ }
 
   return (
-    
     <div className="containermodal">
-      <section>
-        <AppBar id="appbar">Farmer Pets</AppBar>
-      </section>
-      <h1>Push Add for Create a Pet</h1>
+      <div className="navbar">
+      </div>
+    <div className="containerall">
+       <h1>Push Add for Create a Pet</h1>
       <Button style={styleButton} onClick={() => openModal()}>
         <Fab color="warning" aria-label="add">
           <AddIcon />
         </Fab>
       </Button>
+    </div>
+     
 
       <Modal open={newmodal} onClose={openModal}>
         {insideModal}
       </Modal>
-      
-
-
     </div>
   );
 };
